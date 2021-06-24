@@ -1,0 +1,367 @@
+
+Final Project.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000206  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000025a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000025a  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000028c  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000f0  00000000  00000000  000002c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000c0f  00000000  00000000  000003b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000007d3  00000000  00000000  00000fc7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000085f  00000000  00000000  0000179a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000170  00000000  00000000  00001ffc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000004ac  00000000  00000000  0000216c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000439  00000000  00000000  00002618  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000b0  00000000  00000000  00002a51  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 a7 00 	call	0x14e	; 0x14e <main>
+  64:	0c 94 01 01 	jmp	0x202	; 0x202 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <DIO_SetPin_Direction>:
+#include "DIO.h"
+/*Function Implementations*/
+/*Functions for PINS*/
+void DIO_SetPin_Direction(Uint8t port, Uint8t pin, Uint8t direction)/*Define Direction for pin(Ip/Op)*/
+{
+	switch(direction)
+  6c:	44 23       	and	r20, r20
+  6e:	19 f0       	breq	.+6      	; 0x76 <DIO_SetPin_Direction+0xa>
+  70:	41 30       	cpi	r20, 0x01	; 1
+  72:	c9 f1       	breq	.+114    	; 0xe6 <DIO_SetPin_Direction+0x7a>
+  74:	08 95       	ret
+	{
+		case DIO_PIN_INPUT:
+		switch(port)
+  76:	81 30       	cpi	r24, 0x01	; 1
+  78:	91 f0       	breq	.+36     	; 0x9e <DIO_SetPin_Direction+0x32>
+  7a:	28 f0       	brcs	.+10     	; 0x86 <DIO_SetPin_Direction+0x1a>
+  7c:	82 30       	cpi	r24, 0x02	; 2
+  7e:	d9 f0       	breq	.+54     	; 0xb6 <DIO_SetPin_Direction+0x4a>
+  80:	83 30       	cpi	r24, 0x03	; 3
+  82:	29 f1       	breq	.+74     	; 0xce <DIO_SetPin_Direction+0x62>
+  84:	08 95       	ret
+		{
+			case DIO_PORTA:
+			CLR_BIT(DDRA, pin);
+  86:	2a b3       	in	r18, 0x1a	; 26
+  88:	81 e0       	ldi	r24, 0x01	; 1
+  8a:	90 e0       	ldi	r25, 0x00	; 0
+  8c:	02 c0       	rjmp	.+4      	; 0x92 <DIO_SetPin_Direction+0x26>
+  8e:	88 0f       	add	r24, r24
+  90:	99 1f       	adc	r25, r25
+  92:	6a 95       	dec	r22
+  94:	e2 f7       	brpl	.-8      	; 0x8e <DIO_SetPin_Direction+0x22>
+  96:	80 95       	com	r24
+  98:	82 23       	and	r24, r18
+  9a:	8a bb       	out	0x1a, r24	; 26
+			break;
+  9c:	08 95       	ret
+			case DIO_PORTB:
+			CLR_BIT(DDRB, pin);
+  9e:	27 b3       	in	r18, 0x17	; 23
+  a0:	81 e0       	ldi	r24, 0x01	; 1
+  a2:	90 e0       	ldi	r25, 0x00	; 0
+  a4:	02 c0       	rjmp	.+4      	; 0xaa <DIO_SetPin_Direction+0x3e>
+  a6:	88 0f       	add	r24, r24
+  a8:	99 1f       	adc	r25, r25
+  aa:	6a 95       	dec	r22
+  ac:	e2 f7       	brpl	.-8      	; 0xa6 <DIO_SetPin_Direction+0x3a>
+  ae:	80 95       	com	r24
+  b0:	82 23       	and	r24, r18
+  b2:	87 bb       	out	0x17, r24	; 23
+			break;
+  b4:	08 95       	ret
+			case DIO_PORTC:
+			CLR_BIT(DDRC, pin);
+  b6:	24 b3       	in	r18, 0x14	; 20
+  b8:	81 e0       	ldi	r24, 0x01	; 1
+  ba:	90 e0       	ldi	r25, 0x00	; 0
+  bc:	02 c0       	rjmp	.+4      	; 0xc2 <DIO_SetPin_Direction+0x56>
+  be:	88 0f       	add	r24, r24
+  c0:	99 1f       	adc	r25, r25
+  c2:	6a 95       	dec	r22
+  c4:	e2 f7       	brpl	.-8      	; 0xbe <DIO_SetPin_Direction+0x52>
+  c6:	80 95       	com	r24
+  c8:	82 23       	and	r24, r18
+  ca:	84 bb       	out	0x14, r24	; 20
+			break;
+  cc:	08 95       	ret
+			case DIO_PORTD:
+			CLR_BIT(DDRD, pin);
+  ce:	21 b3       	in	r18, 0x11	; 17
+  d0:	81 e0       	ldi	r24, 0x01	; 1
+  d2:	90 e0       	ldi	r25, 0x00	; 0
+  d4:	02 c0       	rjmp	.+4      	; 0xda <DIO_SetPin_Direction+0x6e>
+  d6:	88 0f       	add	r24, r24
+  d8:	99 1f       	adc	r25, r25
+  da:	6a 95       	dec	r22
+  dc:	e2 f7       	brpl	.-8      	; 0xd6 <DIO_SetPin_Direction+0x6a>
+  de:	80 95       	com	r24
+  e0:	82 23       	and	r24, r18
+  e2:	81 bb       	out	0x11, r24	; 17
+			break;
+  e4:	08 95       	ret
+		}
+		break;
+		case DIO_PIN_OUTPUT:
+		switch(port)
+  e6:	81 30       	cpi	r24, 0x01	; 1
+  e8:	89 f0       	breq	.+34     	; 0x10c <DIO_SetPin_Direction+0xa0>
+  ea:	28 f0       	brcs	.+10     	; 0xf6 <DIO_SetPin_Direction+0x8a>
+  ec:	82 30       	cpi	r24, 0x02	; 2
+  ee:	c9 f0       	breq	.+50     	; 0x122 <DIO_SetPin_Direction+0xb6>
+  f0:	83 30       	cpi	r24, 0x03	; 3
+  f2:	11 f1       	breq	.+68     	; 0x138 <DIO_SetPin_Direction+0xcc>
+  f4:	08 95       	ret
+		{
+			case DIO_PORTA:
+			SET_BIT(DDRA, pin);
+  f6:	2a b3       	in	r18, 0x1a	; 26
+  f8:	81 e0       	ldi	r24, 0x01	; 1
+  fa:	90 e0       	ldi	r25, 0x00	; 0
+  fc:	02 c0       	rjmp	.+4      	; 0x102 <DIO_SetPin_Direction+0x96>
+  fe:	88 0f       	add	r24, r24
+ 100:	99 1f       	adc	r25, r25
+ 102:	6a 95       	dec	r22
+ 104:	e2 f7       	brpl	.-8      	; 0xfe <DIO_SetPin_Direction+0x92>
+ 106:	82 2b       	or	r24, r18
+ 108:	8a bb       	out	0x1a, r24	; 26
+			break;
+ 10a:	08 95       	ret
+			case DIO_PORTB:
+			SET_BIT(DDRB, pin);
+ 10c:	27 b3       	in	r18, 0x17	; 23
+ 10e:	81 e0       	ldi	r24, 0x01	; 1
+ 110:	90 e0       	ldi	r25, 0x00	; 0
+ 112:	02 c0       	rjmp	.+4      	; 0x118 <DIO_SetPin_Direction+0xac>
+ 114:	88 0f       	add	r24, r24
+ 116:	99 1f       	adc	r25, r25
+ 118:	6a 95       	dec	r22
+ 11a:	e2 f7       	brpl	.-8      	; 0x114 <DIO_SetPin_Direction+0xa8>
+ 11c:	82 2b       	or	r24, r18
+ 11e:	87 bb       	out	0x17, r24	; 23
+			break;
+ 120:	08 95       	ret
+			case DIO_PORTC:
+			SET_BIT(DDRC, pin);
+ 122:	24 b3       	in	r18, 0x14	; 20
+ 124:	81 e0       	ldi	r24, 0x01	; 1
+ 126:	90 e0       	ldi	r25, 0x00	; 0
+ 128:	02 c0       	rjmp	.+4      	; 0x12e <DIO_SetPin_Direction+0xc2>
+ 12a:	88 0f       	add	r24, r24
+ 12c:	99 1f       	adc	r25, r25
+ 12e:	6a 95       	dec	r22
+ 130:	e2 f7       	brpl	.-8      	; 0x12a <DIO_SetPin_Direction+0xbe>
+ 132:	82 2b       	or	r24, r18
+ 134:	84 bb       	out	0x14, r24	; 20
+			break;
+ 136:	08 95       	ret
+			case DIO_PORTD:
+			SET_BIT(DDRD, pin);
+ 138:	21 b3       	in	r18, 0x11	; 17
+ 13a:	81 e0       	ldi	r24, 0x01	; 1
+ 13c:	90 e0       	ldi	r25, 0x00	; 0
+ 13e:	02 c0       	rjmp	.+4      	; 0x144 <DIO_SetPin_Direction+0xd8>
+ 140:	88 0f       	add	r24, r24
+ 142:	99 1f       	adc	r25, r25
+ 144:	6a 95       	dec	r22
+ 146:	e2 f7       	brpl	.-8      	; 0x140 <DIO_SetPin_Direction+0xd4>
+ 148:	82 2b       	or	r24, r18
+ 14a:	81 bb       	out	0x11, r24	; 17
+ 14c:	08 95       	ret
+
+0000014e <main>:
+#include "util/delay.h"
+#define F_CPU 16000000UL
+
+int main(void)
+{
+	SPI_INIT();
+ 14e:	0e 94 c6 00 	call	0x18c	; 0x18c <SPI_INIT>
+	SPI_SLAVESELECT(0);
+ 152:	80 e0       	ldi	r24, 0x00	; 0
+ 154:	0e 94 ef 00 	call	0x1de	; 0x1de <SPI_SLAVESELECT>
+	UART_Init();
+ 158:	0e 94 f5 00 	call	0x1ea	; 0x1ea <UART_Init>
+
+	DIO_SetPin_Direction(DIO_PORTD,DIO_PIN0,DIO_PIN_INPUT);
+ 15c:	40 e0       	ldi	r20, 0x00	; 0
+ 15e:	60 e0       	ldi	r22, 0x00	; 0
+ 160:	83 e0       	ldi	r24, 0x03	; 3
+ 162:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPin_Direction>
+	DIO_SetPin_Direction(DIO_PORTD,DIO_PIN1,DIO_PIN_OUTPUT);
+ 166:	41 e0       	ldi	r20, 0x01	; 1
+ 168:	61 e0       	ldi	r22, 0x01	; 1
+ 16a:	83 e0       	ldi	r24, 0x03	; 3
+ 16c:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPin_Direction>
+
+	Uint8t data;
+	while (1)
+	{
+		data = UART_Receive();
+ 170:	0e 94 fd 00 	call	0x1fa	; 0x1fa <UART_Receive>
+		SPI_TRANSMIT(data);
+ 174:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <SPI_TRANSMIT>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 178:	2f ef       	ldi	r18, 0xFF	; 255
+ 17a:	82 e5       	ldi	r24, 0x52	; 82
+ 17c:	97 e0       	ldi	r25, 0x07	; 7
+ 17e:	21 50       	subi	r18, 0x01	; 1
+ 180:	80 40       	sbci	r24, 0x00	; 0
+ 182:	90 40       	sbci	r25, 0x00	; 0
+ 184:	e1 f7       	brne	.-8      	; 0x17e <main+0x30>
+ 186:	00 c0       	rjmp	.+0      	; 0x188 <main+0x3a>
+ 188:	00 00       	nop
+ 18a:	f2 cf       	rjmp	.-28     	; 0x170 <main+0x22>
+
+0000018c <SPI_INIT>:
+	while (GET_BIT(SPSR, SPIF) != 1);
+}
+void SPI_RECEIVE(Uint8t* data)
+{
+	while (GET_BIT(SPSR, SPIF) != 1);
+	*data = SPDR;
+ 18c:	87 b3       	in	r24, 0x17	; 23
+ 18e:	80 62       	ori	r24, 0x20	; 32
+ 190:	87 bb       	out	0x17, r24	; 23
+ 192:	87 b3       	in	r24, 0x17	; 23
+ 194:	8f 7b       	andi	r24, 0xBF	; 191
+ 196:	87 bb       	out	0x17, r24	; 23
+ 198:	87 b3       	in	r24, 0x17	; 23
+ 19a:	80 68       	ori	r24, 0x80	; 128
+ 19c:	87 bb       	out	0x17, r24	; 23
+ 19e:	87 b3       	in	r24, 0x17	; 23
+ 1a0:	80 61       	ori	r24, 0x10	; 16
+ 1a2:	87 bb       	out	0x17, r24	; 23
+ 1a4:	8d b1       	in	r24, 0x0d	; 13
+ 1a6:	8f 77       	andi	r24, 0x7F	; 127
+ 1a8:	8d b9       	out	0x0d, r24	; 13
+ 1aa:	8d b1       	in	r24, 0x0d	; 13
+ 1ac:	80 61       	ori	r24, 0x10	; 16
+ 1ae:	8d b9       	out	0x0d, r24	; 13
+ 1b0:	8d b1       	in	r24, 0x0d	; 13
+ 1b2:	80 62       	ori	r24, 0x20	; 32
+ 1b4:	8d b9       	out	0x0d, r24	; 13
+ 1b6:	8d b1       	in	r24, 0x0d	; 13
+ 1b8:	87 7f       	andi	r24, 0xF7	; 247
+ 1ba:	8d b9       	out	0x0d, r24	; 13
+ 1bc:	8e b1       	in	r24, 0x0e	; 14
+ 1be:	8e 7f       	andi	r24, 0xFE	; 254
+ 1c0:	8e b9       	out	0x0e, r24	; 14
+ 1c2:	8d b1       	in	r24, 0x0d	; 13
+ 1c4:	82 60       	ori	r24, 0x02	; 2
+ 1c6:	8d b9       	out	0x0d, r24	; 13
+ 1c8:	8d b1       	in	r24, 0x0d	; 13
+ 1ca:	81 60       	ori	r24, 0x01	; 1
+ 1cc:	8d b9       	out	0x0d, r24	; 13
+ 1ce:	8d b1       	in	r24, 0x0d	; 13
+ 1d0:	80 64       	ori	r24, 0x40	; 64
+ 1d2:	8d b9       	out	0x0d, r24	; 13
+ 1d4:	08 95       	ret
+
+000001d6 <SPI_TRANSMIT>:
+ 1d6:	8f b9       	out	0x0f, r24	; 15
+ 1d8:	77 9b       	sbis	0x0e, 7	; 14
+ 1da:	fe cf       	rjmp	.-4      	; 0x1d8 <SPI_TRANSMIT+0x2>
+ 1dc:	08 95       	ret
+
+000001de <SPI_SLAVESELECT>:
+}
+void SPI_SLAVESELECT(Uint8t slave)
+{
+	if(slave == 0)
+ 1de:	81 11       	cpse	r24, r1
+ 1e0:	03 c0       	rjmp	.+6      	; 0x1e8 <SPI_SLAVESELECT+0xa>
+	{
+		CLR_BIT(PORTB, SS);
+ 1e2:	88 b3       	in	r24, 0x18	; 24
+ 1e4:	8f 7e       	andi	r24, 0xEF	; 239
+ 1e6:	88 bb       	out	0x18, r24	; 24
+ 1e8:	08 95       	ret
+
+000001ea <UART_Init>:
+}
+void UART_Transmit(Uint8t data)
+{
+	UDR = data;
+	while (GET_BIT(UCSRA, TXC) != 1);
+}
+ 1ea:	88 e1       	ldi	r24, 0x18	; 24
+ 1ec:	8a b9       	out	0x0a, r24	; 10
+ 1ee:	86 e8       	ldi	r24, 0x86	; 134
+ 1f0:	80 bd       	out	0x20, r24	; 32
+ 1f2:	87 e6       	ldi	r24, 0x67	; 103
+ 1f4:	89 b9       	out	0x09, r24	; 9
+ 1f6:	10 bc       	out	0x20, r1	; 32
+ 1f8:	08 95       	ret
+
+000001fa <UART_Receive>:
+Uint8t UART_Receive(void)
+{
+	while (GET_BIT(UCSRA, RXC) != 1);
+ 1fa:	5f 9b       	sbis	0x0b, 7	; 11
+ 1fc:	fe cf       	rjmp	.-4      	; 0x1fa <UART_Receive>
+	return UDR;
+ 1fe:	8c b1       	in	r24, 0x0c	; 12
+}
+ 200:	08 95       	ret
+
+00000202 <_exit>:
+ 202:	f8 94       	cli
+
+00000204 <__stop_program>:
+ 204:	ff cf       	rjmp	.-2      	; 0x204 <__stop_program>
